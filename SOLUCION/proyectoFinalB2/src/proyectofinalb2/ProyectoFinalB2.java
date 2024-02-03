@@ -1,10 +1,11 @@
 package proyectofinalb2;
 
-import java.io.File;
-import java.util.Scanner;
-import java.text.DecimalFormat;
 
-public class ProyectoFinalB2 {
+import java.io.File;
+import java.text.DecimalFormat;
+import java.util.Scanner;
+
+public class ProyectoFinalB2{
 
     public static void main(String[] args) {
 
@@ -21,11 +22,12 @@ public class ProyectoFinalB2 {
         dia = put.nextInt();
 
         String nombrePelicula = "", sala = null, nombreHora = "", orden = "";
-        int comprar, nBoletos, pelicula, hora, fil, col, snack, combo, limFil = 5, limCol = 5, pcombo = 0;
+        int comprar, nBoletos, pelicula, hora, fil, col, snack, combo, limFil = 5, limCol = 5, pcombo = 0,comprarSnacks;
         boolean opcionValida = true, asientoLibre = true, seguircomprando = true;
         double precioXboleto = 0, precioxCombo = 0, totalCombo = 0;
-        String opcion;
+        String opcion, continuar;
         String asientos[][] = new String[limFil][limCol];
+        String matC[][]=new String[3][4];
         System.out.println("****************************");
         System.out.println("DESEA COMPRAR BOLETOS?");
         System.out.println("[1] Si");
@@ -92,10 +94,7 @@ public class ProyectoFinalB2 {
                         System.out.println("ELIGE OTRA VEZ");
                         System.out.println("!-!-!-!-!-!-!-!-!-!-!-!-!" + "\n"); //vuelve a preguntar si no existe la respuesta
                         pelicula = put.nextInt();
-                        
-
                 }
-            
             }
             System.out.println("****************************");
             opcionValida = true;
@@ -138,7 +137,6 @@ public class ProyectoFinalB2 {
             crearSala(limFil, limCol, asientos); // se llenan los asientos con  " - "  
             for (int i = 0; i < nBoletos; i++) {
                 asientoLibre = true;
-
                 while (asientoLibre) {
                     System.out.println("----------------------");
                     System.out.println("ELIJA EL ASIENTO " + (i + 1));
@@ -161,151 +159,72 @@ public class ProyectoFinalB2 {
             }
             System.out.println(facturaPelicula(facturaAsientos, nBoletos, precioXboleto, nombrePelicula, nombreHora, sala));
         }
-        System.out.println("****************************");
         System.out.println("DESEA COMPRAR SNACKS?");
         System.out.println("[1] Si");
         System.out.println("[2] No");
-        comprar = put.nextInt();
-        System.out.println("****************************");
-        while (seguircomprando) {
-            if (comprar == 1) {
-                System.out.println("******************************************");
-                System.out.println("ESCOJA SU OPCION DE COMBO");
-                System.out.println("[1] COMBO(Bebida con Canguil)($3)");
-                System.out.println("[2] COMBO(Bebida con Canguil y un Raspado)($7)");
-                System.out.println("[3] COMBO(Nachos con Burrito y Raspado )($9)");
-                System.out.println("[4] COMBO PERSONALIZADO");
-                System.out.println("[5] SNACKS");
-                System.out.println("******************************************");
-                combo = put.nextInt();
-
+        comprarSnacks = put.nextInt();
+        if (comprarSnacks==1){
+            generarCombos(matC);
+            do{
+                System.out.println("ELIJA SU COMBO");
+            System.out.println(" "+matC[0][0]+"["+matC[0][1]+"]"+" precio: "+ matC[0][2]);
+            System.out.println(" "+matC[1][0]+"["+matC[1][1]+"]"+" precio: "+matC[1][2]);
+            System.out.println(" "+matC[2][0]+"["+matC[2][1]+"]"+" precio: "+matC[2][2]);
+            combo = put.nextInt(); 
                 switch (combo) {
                     case 1:
-                        orden += "COMBO[1] ";
-                        precioxCombo = 3;
+                        orden += matC[0][0];;
+                        precioxCombo = Integer.valueOf(matC[0][2]);
                         if (nombrePelicula.equals("SPIDERMAN")) {//SI SE ESCOGE LA PELICULA SPIDERMAN DESCUENTO
                             System.out.println("*******************************************************************************");
                             System.out.println("PARA LA FUNCION SPIDERMAN TENEMOS UN DESCUENTO DE 10% PARA EL COMBO [1]");
                             System.out.println("*******************************************************************************");
 
-                            precioxCombo = precioxCombo - (precioxCombo * 0.10);
+                            precioxCombo = Integer.valueOf(matC[0][3]);
 
                         } else if (nombrePelicula.equals("BARBIE")) {
                             System.out.println("*******************************************************************************");
                             System.out.println("PARA LA FUNCION BARBIE TENEMOS UN DESCUENTO DE 15% PARA EL COMBO [1]");
                             System.out.println("*******************************************************************************");
 
-                            precioxCombo = precioxCombo - (precioxCombo * 0.15);
+                            precioxCombo = Integer.valueOf(matC[2][3]);//precio descueto barbie tercer casilla
                         }
                         break;
                     case 2:
-                        orden += "COMBO[2] ";
+                        orden += matC[1][0];
                         if (nombrePelicula.equals("LEGO")) {
                             System.out.println("*******************************************************************************");
                             System.out.println("PARA LA FUNCION LEGO TENEMOS UN DESCUENTO DE 25% PARA EL COMBO[2]");
                             System.out.println("*******************************************************************************");
-                            precioxCombo = 7;
-                            precioxCombo = precioxCombo - (precioxCombo * 0.25);
+                            precioxCombo = Integer.valueOf(matC[1][3]);//precio descuento lego tercer casilla
                         } else {
-                            precioxCombo = 7;
+                            precioxCombo = Integer.valueOf(matC[1][2]);
                         }
                         break;
                     case 3:
-                        orden += "COMBO[3] ";
+                        orden += matC[2][0];
                         if (nombreHora.equals("22h00")) {
                             System.out.println("*******************************************************************************");
                             System.out.println("POR SER LA ULTIMA FUNCION 22h00 SE APLICA DESCUENTO DE 50% EN EL COMBO");
                             System.out.println("*******************************************************************************");
-                            precioxCombo = 9;
-                            precioxCombo = precioxCombo - (precioxCombo * 0.5);//METODO O FUNCION PARA HACER ESTOS CALCULOS
+                            precioxCombo = Integer.valueOf(matC[2][3]);//precio descuento combo tercer casilla
+                            
                         } else {
-                            precioxCombo = 9;
+                            precioxCombo = Integer.valueOf(matC[2][2]);
                         }
                         break;
-                    case 4:
-                        orden += "COMBO[4] ";
-                        System.out.println("*************************************");
-                        System.out.println("PERSONALISE SU COMBO");// AQUI UN PARAMETRO PARA INCREMENTAR EL COMBO SEEGUN PRECIO INDIVIDUAL
-                        System.out.println("[1] CANGUIL($2.50)");
-                        System.out.println("[2] NACHOS ($3)");
-                        System.out.println("[3] RASPADO ($2.75)");
-                        System.out.println("[4] BURRITO ($3.25)");
-                        System.out.println("[5] BEBIDA ($1)");
-                        System.out.println("************************************");
-                        pcombo = put.nextInt();
-                        switch (pcombo) {
-                            case 1:
-                                precioxCombo = 2.50;
-                                break;
-                            case 2:
-                                precioxCombo = 3;
-
-                                break;
-                            case 3:
-                                precioxCombo = 2.75;
-
-                                break;
-                            case 4:
-                                precioxCombo = 3.25;
-
-                                break;
-                            case 5:
-                                precioxCombo = 1;
-
-                                break;
-                        }
-                        break;
-
-                    case 5:
-                        orden += "SNACK ";
-                        System.out.println("ESCOJA SU SNACK");
-                        System.out.println("[1] CHOCOLATE JET ($0.75)");
-                        System.out.println("[2] DORITOS ($1.25)");
-                        System.out.println("[3] M&M'S ($1.50)");
-                        System.out.println("[4] GALLETAS OREO ($0.50)");
-                        snack = put.nextInt();
-                        switch (snack) {
-                            case 1:
-                                precioxCombo = 0.75;
-                                break;
-                            case 2:
-                                precioxCombo = 1.25;
-                                break;
-                            case 3:
-                                precioxCombo = 1.50;
-                                break;
-                            case 4:
-                                precioxCombo = 0.50;
-                                break;
-                        }
-
-                        break;
-                    default:
-                        System.out.println("\n" + "!-!-!-!-!-!-!-!-!-!-!-!-!");
-                        System.out.println("NO EXISTE ESA OPCION");
-                        System.out.println("ELIGE OTRA VEZ");
-                        System.out.println("!-!-!-!-!-!-!-!-!-!-!-!-!" + "\n");
-                        combo = put.nextInt();
-
-                }
-
-            }
-            System.out.println("DESEA COMPRAR OTRO COMBO/SNACK? SI/NO");
-            opcion = put.next();
-            if (opcion.equals("NO")) {
-                seguircomprando = false;
             }
             System.out.println("******************************************");
             totalCombo += precioxCombo;
-
+        
+        System.out.println("DESEA COMPRAR OTRO COMBO?");
+                continuar = put.next();
+                
+        }while(continuar.equalsIgnoreCase("SI"));
         }
-
         //SALGO DEL WHILE y incremento
         System.out.println(facturaSnack(totalCombo, orden));
     }
-
-    
-
     public static String presentarAsientos(int limFil, int limCol, String asientos[][]) {
         String dibujoAsientos="";
         for (int k = 0; k < limFil; k++) {
@@ -379,7 +298,21 @@ public class ProyectoFinalB2 {
                 + "TOTAL: $" + totalDecim + "\n"
                 + "TOTAL A PAGAR: $" + totalPagarSnacksDecim + "\n"
                 + "=================================================" + "\n\n\n\n\n";
-
         return facturaSn;
+    }
+    public static void generarCombos(String matC[][] ){
+        try {
+            Scanner leer = new Scanner(new File("combos.txt"));
+            int i=0;
+            while(leer.hasNext()){
+                String datos[] = leer.nextLine().split(";");
+                matC[i][0]=datos[0];
+                matC[i][1]=datos[1];
+                matC[i][2]=datos[2];
+                i++;
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
