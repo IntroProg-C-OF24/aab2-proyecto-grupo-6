@@ -2,15 +2,27 @@ package proyectofinalb2;
 
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.text.DecimalFormat;
+import java.util.Formatter;
 import java.util.Scanner;
 
 public class ProyectoFinalB2{
 
     public static void main(String[] args) {
-
+        String nombrePelicula = "", sala = null, nombreHora = "", orden = "";
+        int comprar, nBoletos=0, pelicula, hora, fil, col, combo, limFil = 5, limCol = 5,comprarSnacks,clienteNuevo,contador = 0;
+        boolean opcionValida = true, asientoLibre = true;
+        double precioXboleto = 0, precioxCombo = 0, totalCombo = 0;
+        String opcion, continuar,nombreDia="";
+        String asientos[][] = new String[limFil][limCol];
+        String matC[][]=new String[3][4];
         Scanner put = new Scanner(System.in);
         int dia;
+        System.out.println("CUANTOS CLIENTES VA A INGRESAR");
+        clienteNuevo = put.nextInt();
+        String datosRegistroPelicula[][] = new String[clienteNuevo][4];
+        String datosRegistroCombos[][]= new String[clienteNuevo][4];
         System.out.println("Dia:");
         System.out.println("[1]LUNES");
         System.out.println("[2]MARTES   (boletos a mitad de precio)");
@@ -20,14 +32,46 @@ public class ProyectoFinalB2{
         System.out.println("[6]SABADO");
         System.out.println("[7]DOMINGO");
         dia = put.nextInt();
-
-        String nombrePelicula = "", sala = null, nombreHora = "", orden = "";
-        int comprar, nBoletos, pelicula, hora, fil, col, snack, combo, limFil = 5, limCol = 5, pcombo = 0,comprarSnacks;
-        boolean opcionValida = true, asientoLibre = true, seguircomprando = true;
-        double precioXboleto = 0, precioxCombo = 0, totalCombo = 0;
-        String opcion, continuar;
-        String asientos[][] = new String[limFil][limCol];
-        String matC[][]=new String[3][4];
+            
+        while (opcionValida) {
+            switch (dia) {
+                case 1:
+                    nombreDia = "LUNES";
+                    opcionValida = false;
+                    break;
+                case 2:
+                    nombreDia = "MARTES";
+                    opcionValida = false;
+                    break;
+                case 3:
+                    nombreDia = "MIERCOLES";
+                    opcionValida = false;
+                    break;
+                case 4:
+                    nombreDia = "JUEVES";
+                    opcionValida = false;
+                    break;
+                case 5:
+                    nombreDia = "VIERNES";
+                    opcionValida = false;
+                    break;
+                case 6:
+                    nombreDia = "SABADO";
+                    opcionValida = false;
+                    break;
+                case 7:
+                    nombreDia = "DOMINGO";
+                    opcionValida = false;
+                    break;
+                default:
+                    System.out.println("\n" + "!-!-!-!-!-!-!-!-!-!-!-!-!");
+                    System.out.println("NO EXISTE ESA OPCION");
+                    System.out.println("ELIGE OTRA VEZ");
+                    System.out.println("!-!-!-!-!-!-!-!-!-!-!-!-!" + "\n"); //vuelve a preguntar si no existe la respuesta
+                    pelicula = put.nextInt();
+            }
+        }
+        while (contador < clienteNuevo) {
         System.out.println("****************************");
         System.out.println("DESEA COMPRAR BOLETOS?");
         System.out.println("[1] Si");
@@ -39,7 +83,7 @@ public class ProyectoFinalB2{
             nBoletos = put.nextInt();
             String facturaAsientos[] = new String[nBoletos];  //se crea en base al numero de boletos comprados
             String mat[][] = new String[4][4];
-            transportarDatosDocumento(mat);
+            transportarDatosPeliculas(mat);
             System.out.println("ELIJA SU PELICULA");
             System.out.println("1 " + mat[0][0] + "[$" + mat[0][1] + "]" + " (estreno)");
             System.out.println("2 " + mat[1][0] + "[$" + mat[1][1] + "]");
@@ -157,7 +201,7 @@ public class ProyectoFinalB2{
                     }
                 }
             }
-            System.out.println(facturaPelicula(facturaAsientos, nBoletos, precioXboleto, nombrePelicula, nombreHora, sala));
+            //System.out.println(facturaPelicula(facturaAsientos, nBoletos, precioXboleto, nombrePelicula, nombreHora, sala));
         }
         System.out.println("DESEA COMPRAR SNACKS?");
         System.out.println("[1] Si");
@@ -221,9 +265,14 @@ public class ProyectoFinalB2{
                 continuar = put.next();
                 
         }while(continuar.equalsIgnoreCase("SI"));
-        }
-        //SALGO DEL WHILE y incremento
-        System.out.println(facturaSnack(totalCombo, orden));
+        }//SALGO DEL WHILE
+        //System.out.println(facturaPelicula(args, nBoletos, precioXboleto, nombrePelicula, nombreHora, sala, nombreDia, clienteNuevo, contador, datosRegistroPelicula));
+            facturaPelicula(args, nBoletos, precioXboleto, nombrePelicula, nombreHora, sala, nombreDia, clienteNuevo, contador, datosRegistroPelicula);
+        generarRegistroPeliculas(clienteNuevo, datosRegistroPelicula, nombreDia);
+        System.out.println(facturaSnack(totalCombo, orden, datosRegistroCombos, contador));
+        generarRegistroSnacks(clienteNuevo, orden, nombreDia, datosRegistroCombos);
+        contador++;
+    }
     }
     public static String presentarAsientos(int limFil, int limCol, String asientos[][]) {
         String dibujoAsientos="";
@@ -235,7 +284,7 @@ public class ProyectoFinalB2{
         }
         return dibujoAsientos;
     }
-    public static void transportarDatosDocumento(String mat[][]) {
+    public static void transportarDatosPeliculas(String mat[][]) {
         try {
 
             Scanner leer = new Scanner(new File("pelicula.csv"));
@@ -251,7 +300,6 @@ public class ProyectoFinalB2{
         } catch (Exception e) {
         }
     }
-
     public static void crearSala(int limFil, int limCol, String asientos[][]) {
         for (int i = 0; i < limFil; i++) {
             for (int j = 0; j < limCol; j++) {
@@ -259,8 +307,7 @@ public class ProyectoFinalB2{
             }
         }
     }
-
-    public static String facturaPelicula(String facturaAsientos[], int nBoletos, double precioXboleto, String nombrePelicula, String nombreHora, String sala) {
+    public static String facturaPelicula(String facturaAsientos[], int nBoletos, double precioXboleto, String nombrePelicula, String nombreHora, String sala, String nombreDia, int clienteNuevo, int contador, String datosRegistroPelicula[][]) {
         String boletos = "";
         DecimalFormat df = new DecimalFormat("#.##"); //es una clase que permite reducir valores decimales
         double iva = ((nBoletos * precioXboleto) * 0.12), totalPagarPelicula = ((nBoletos * precioXboleto) + iva);
@@ -283,9 +330,15 @@ public class ProyectoFinalB2{
                     + "Asiento: " + facturaAsientos[i] + "\n"
                     + "==================================================" + "\n\n\n";
         }
+
+        datosRegistroPelicula[contador][0] = "";
+        datosRegistroPelicula[contador][1] = nombrePelicula;
+        datosRegistroPelicula[contador][2] = (String.valueOf(nBoletos) + " boletos");
+        datosRegistroPelicula[contador][3] = totalPagarPeliculaDecim;
+        
         return boletos;
     }
-    public static String facturaSnack(double totalCombo, String orden) {
+    public static String facturaSnack(double totalCombo, String orden,String datosRegistroCombos [][],int contador) {
         String facturaSn = "";
         DecimalFormat df = new DecimalFormat("#.##"); //es una clase que permite reducir valores decimales
         double iva = (totalCombo * 0.12), total = (totalCombo + iva);
@@ -298,6 +351,9 @@ public class ProyectoFinalB2{
                 + "TOTAL: $" + totalDecim + "\n"
                 + "TOTAL A PAGAR: $" + totalPagarSnacksDecim + "\n"
                 + "=================================================" + "\n\n\n\n\n";
+        datosRegistroCombos[contador][0] = "";
+        datosRegistroCombos[contador][1] = orden;
+        datosRegistroCombos[contador][2] = totalPagarSnacksDecim;
         return facturaSn;
     }
     public static void generarCombos(String matC[][] ){
@@ -309,10 +365,38 @@ public class ProyectoFinalB2{
                 matC[i][0]=datos[0];
                 matC[i][1]=datos[1];
                 matC[i][2]=datos[2];
+                matC[i][3]=datos[3];
                 i++;
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }public static void generarRegistroSnacks(int clienteNuevo,String orden,String nombreDia,String datosRegistroCombos[][]) {
+       String nombres[] = {"Pedro", "Carlos", "Juan", "Emilia", "Daniel", "Sebastian", "Manuel", "Maria", "Paula", "Jean"};
+       int aleat = (int) (Math.random() * 10 + 0);     
+        try (Formatter escritura = new Formatter("registroSnacks.csv")) {
+            for (int i = 0; i < clienteNuevo; i++) {
+                String fecha = nombreDia;
+                escritura.format("%s;%s;%s;%s;%s; \n", nombres[aleat], fecha, datosRegistroCombos[i][0], datosRegistroCombos[i][1], datosRegistroCombos[i][2]);
+            }
+                escritura.close();
+            
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+    }public static void generarRegistroPeliculas(int clienteNuevo,String datosRegistroPelicula[][],String nombreDia){
+        try {
+            Formatter escritura = new Formatter("registroPelis.csv");
+            String nombres[] = {"Pedro", "Carlos", "Juan", "Emilia", "Daniel", "Sebastian", "Manuel", "Maria", "Paula", "Jean"};
+            int aleat = (int) (Math.random() * 10 + 0);
+            for (int i = 0; i < clienteNuevo; i++) {
+                escritura.format("%s;%s;%s;%s;%s;%s\n", nombres[aleat], datosRegistroPelicula[i][0], datosRegistroPelicula[i][1], datosRegistroPelicula[i][2], datosRegistroPelicula[i][3], nombreDia);
+
+            }
+            escritura.close();
+
+        } catch (Exception e) {
+        }
     }
+    
 }
