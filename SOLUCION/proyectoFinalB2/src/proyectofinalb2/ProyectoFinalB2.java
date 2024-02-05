@@ -15,10 +15,49 @@ public class ProyectoFinalB2 {
         int comprar, nBoletos, pelicula, hora, fil, col, snack, combo, limFil = 5, limCol = 5, pcombo = 0, dia, clienteNuevo, contador = 0, continuar;
         boolean opcionValida = true, asientoLibre = true, seguircomprando = true, otroCliente = true;
         double precioXboleto = 0, precioxCombo = 0, totalCombo = 0;
-        String asientos[][] = new String[limFil][limCol];
+        String asientosA16[][] = new String[limFil][limCol];
+        String asientosA18[][] = new String[limFil][limCol];
+        String asientosA20[][] = new String[limFil][limCol];
+        String asientosA22[][] = new String[limFil][limCol];
+
+        String asientosB16[][] = new String[limFil][limCol];
+        String asientosB18[][] = new String[limFil][limCol];
+        String asientosB20[][] = new String[limFil][limCol];
+        String asientosB22[][] = new String[limFil][limCol];
+
+        String asientosC16[][] = new String[limFil][limCol];
+        String asientosC18[][] = new String[limFil][limCol];
+        String asientosC20[][] = new String[limFil][limCol];
+        String asientosC22[][] = new String[limFil][limCol];
+
+        String asientosD16[][] = new String[limFil][limCol];
+        String asientosD18[][] = new String[limFil][limCol];
+        String asientosD20[][] = new String[limFil][limCol];
+        String asientosD22[][] = new String[limFil][limCol];
+
         String mat[][] = new String[4][4];
         String matC[][] = new String[3][4];
         String nombresRandom[] = {"Pedro", "Carlos", "Juan", "Emilia", "Daniel", "Sebastian", "Manuel", "Maria", "Paula", "Jean"};
+
+        crearSalaA16(limFil, limCol, asientosA16);
+        crearSalaA18(limFil, limCol, asientosA18);
+        crearSalaA20(limFil, limCol, asientosA20);
+        crearSalaA22(limFil, limCol, asientosA22);
+
+        crearSalaB16(limFil, limCol, asientosB16);
+        crearSalaB18(limFil, limCol, asientosB18);
+        crearSalaB20(limFil, limCol, asientosB20);
+        crearSalaB22(limFil, limCol, asientosB22);
+
+        crearSalaC16(limFil, limCol, asientosC16);
+        crearSalaC18(limFil, limCol, asientosC18);
+        crearSalaC20(limFil, limCol, asientosC20);
+        crearSalaC22(limFil, limCol, asientosC22);
+
+        crearSalaD16(limFil, limCol, asientosD16);
+        crearSalaD18(limFil, limCol, asientosD18);
+        crearSalaD20(limFil, limCol, asientosD20);
+        crearSalaD22(limFil, limCol, asientosD22);
 
         importarDatosPeliculas(mat);
         importarDatosSnacks(matC);
@@ -189,7 +228,7 @@ public class ProyectoFinalB2 {
                     }
                 }
                 System.out.println("****************************");
-                crearSala(limFil, limCol, asientos); // se llenan los asientos con  " - "  
+
                 for (int i = 0; i < nBoletos; i++) {
                     asientoLibre = true;
 
@@ -201,15 +240,215 @@ public class ProyectoFinalB2 {
                         System.out.println("-ELIJA SU COLUMNA  -  [1-5]");
                         col = put.nextInt();
                         System.out.println("----------------------");
-                        if (asientos[fil - 1][col - 1] == "X") {
-                            System.out.println("\n" + "!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!");
-                            System.out.println("ESE ASIENTO YA ESTA OCUPADO, PRUEBA CON OTRO");
-                            System.out.println("!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!" + "\n");   //vuelve a preguntar si detecta que ya esta ocupado
-                        } else {
-                            asientos[fil - 1][col - 1] = "X";
-                            asientoLibre = false;
-                            facturaAsientos[i] = fil + "-" + col;
-                            System.out.println(dibujarAsientos(limFil, limCol, asientos));
+                        switch (pelicula) {
+                            case 1:
+                                switch (hora) {
+                                    case 1:
+                                        if (asientosA16[fil - 1][col - 1] == "X") {
+                                            System.out.println("\n" + "!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!");
+                                            System.out.println("ESE ASIENTO YA ESTA OCUPADO, PRUEBA CON OTRO");
+                                            System.out.println("!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!" + "\n");   //vuelve a preguntar si detecta que ya esta ocupado
+                                        } else {
+                                            asientosA16[fil - 1][col - 1] = "X";
+                                            asientoLibre = false;
+                                            facturaAsientos[i] = fil + "-" + col;
+                                            System.out.println(dibujarAsientos(limFil, limCol, asientosA16, asientosA18, asientosA20, asientosA22, asientosB16, asientosB18, asientosB20, asientosB22, asientosC16, asientosC18, asientosC20, asientosC22, asientosD16, asientosD18, asientosD20, asientosD22, pelicula, hora));
+                                        }
+                                        break;
+                                    case 2:
+                                        if (asientosA18[fil - 1][col - 1] == "X") {
+                                            System.out.println("\n" + "!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!");
+                                            System.out.println("ESE ASIENTO YA ESTA OCUPADO, PRUEBA CON OTRO");
+                                            System.out.println("!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!" + "\n");   //vuelve a preguntar si detecta que ya esta ocupado
+                                        } else {
+                                            asientosA18[fil - 1][col - 1] = "X";
+                                            asientoLibre = false;
+                                            facturaAsientos[i] = fil + "-" + col;
+                                            System.out.println(dibujarAsientos(limFil, limCol, asientosA16, asientosA18, asientosA20, asientosA22, asientosB16, asientosB18, asientosB20, asientosB22, asientosC16, asientosC18, asientosC20, asientosC22, asientosD16, asientosD18, asientosD20, asientosD22, pelicula, hora));
+                                        }
+                                        break;
+                                    case 3:
+                                        if (asientosA20[fil - 1][col - 1] == "X") {
+                                            System.out.println("\n" + "!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!");
+                                            System.out.println("ESE ASIENTO YA ESTA OCUPADO, PRUEBA CON OTRO");
+                                            System.out.println("!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!" + "\n");   //vuelve a preguntar si detecta que ya esta ocupado
+                                        } else {
+                                            asientosA20[fil - 1][col - 1] = "X";
+                                            asientoLibre = false;
+                                            facturaAsientos[i] = fil + "-" + col;
+                                            System.out.println(dibujarAsientos(limFil, limCol, asientosA16, asientosA18, asientosA20, asientosA22, asientosB16, asientosB18, asientosB20, asientosB22, asientosC16, asientosC18, asientosC20, asientosC22, asientosD16, asientosD18, asientosD20, asientosD22, pelicula, hora));
+                                        }
+                                        break;
+                                    case 4:
+                                        if (asientosA22[fil - 1][col - 1] == "X") {
+                                            System.out.println("\n" + "!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!");
+                                            System.out.println("ESE ASIENTO YA ESTA OCUPADO, PRUEBA CON OTRO");
+                                            System.out.println("!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!" + "\n");   //vuelve a preguntar si detecta que ya esta ocupado
+                                        } else {
+                                            asientosA22[fil - 1][col - 1] = "X";
+                                            asientoLibre = false;
+                                            facturaAsientos[i] = fil + "-" + col;
+                                            System.out.println(dibujarAsientos(limFil, limCol, asientosA16, asientosA18, asientosA20, asientosA22, asientosB16, asientosB18, asientosB20, asientosB22, asientosC16, asientosC18, asientosC20, asientosC22, asientosD16, asientosD18, asientosD20, asientosD22, pelicula, hora));
+                                        }
+                                        break;
+                                }
+                                break;
+                            case 2:
+                                switch (hora) {
+                                    case 1:
+                                        if (asientosB16[fil - 1][col - 1] == "X") {
+                                            System.out.println("\n" + "!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!");
+                                            System.out.println("ESE ASIENTO YA ESTA OCUPADO, PRUEBA CON OTRO");
+                                            System.out.println("!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!" + "\n");   //vuelve a preguntar si detecta que ya esta ocupado
+                                        } else {
+                                            asientosB16[fil - 1][col - 1] = "X";
+                                            asientoLibre = false;
+                                            facturaAsientos[i] = fil + "-" + col;
+                                            System.out.println(dibujarAsientos(limFil, limCol, asientosA16, asientosA18, asientosA20, asientosA22, asientosB16, asientosB18, asientosB20, asientosB22, asientosC16, asientosC18, asientosC20, asientosC22, asientosD16, asientosD18, asientosD20, asientosD22, pelicula, hora));
+                                        }
+                                        break;
+                                    case 2:
+                                        if (asientosB18[fil - 1][col - 1] == "X") {
+                                            System.out.println("\n" + "!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!");
+                                            System.out.println("ESE ASIENTO YA ESTA OCUPADO, PRUEBA CON OTRO");
+                                            System.out.println("!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!" + "\n");   //vuelve a preguntar si detecta que ya esta ocupado
+                                        } else {
+                                            asientosB18[fil - 1][col - 1] = "X";
+                                            asientoLibre = false;
+                                            facturaAsientos[i] = fil + "-" + col;
+                                            System.out.println(dibujarAsientos(limFil, limCol, asientosA16, asientosA18, asientosA20, asientosA22, asientosB16, asientosB18, asientosB20, asientosB22, asientosC16, asientosC18, asientosC20, asientosC22, asientosD16, asientosD18, asientosD20, asientosD22, pelicula, hora));
+                                        }
+                                        break;
+                                    case 3:
+                                        if (asientosB20[fil - 1][col - 1] == "X") {
+                                            System.out.println("\n" + "!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!");
+                                            System.out.println("ESE ASIENTO YA ESTA OCUPADO, PRUEBA CON OTRO");
+                                            System.out.println("!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!" + "\n");   //vuelve a preguntar si detecta que ya esta ocupado
+                                        } else {
+                                            asientosB20[fil - 1][col - 1] = "X";
+                                            asientoLibre = false;
+                                            facturaAsientos[i] = fil + "-" + col;
+                                            System.out.println(dibujarAsientos(limFil, limCol, asientosA16, asientosA18, asientosA20, asientosA22, asientosB16, asientosB18, asientosB20, asientosB22, asientosC16, asientosC18, asientosC20, asientosC22, asientosD16, asientosD18, asientosD20, asientosD22, pelicula, hora));
+                                        }
+                                        break;
+                                    case 4:
+                                        if (asientosB22[fil - 1][col - 1] == "X") {
+                                            System.out.println("\n" + "!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!");
+                                            System.out.println("ESE ASIENTO YA ESTA OCUPADO, PRUEBA CON OTRO");
+                                            System.out.println("!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!" + "\n");   //vuelve a preguntar si detecta que ya esta ocupado
+                                        } else {
+                                            asientosB22[fil - 1][col - 1] = "X";
+                                            asientoLibre = false;
+                                            facturaAsientos[i] = fil + "-" + col;
+                                            System.out.println(dibujarAsientos(limFil, limCol, asientosA16, asientosA18, asientosA20, asientosA22, asientosB16, asientosB18, asientosB20, asientosB22, asientosC16, asientosC18, asientosC20, asientosC22, asientosD16, asientosD18, asientosD20, asientosD22, pelicula, hora));
+                                        }
+                                        break;
+                                }
+                                break;
+                            case 3:
+                                switch (hora) {
+                                    case 1:
+                                        if (asientosC16[fil - 1][col - 1] == "X") {
+                                            System.out.println("\n" + "!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!");
+                                            System.out.println("ESE ASIENTO YA ESTA OCUPADO, PRUEBA CON OTRO");
+                                            System.out.println("!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!" + "\n");   //vuelve a preguntar si detecta que ya esta ocupado
+                                        } else {
+                                            asientosC16[fil - 1][col - 1] = "X";
+                                            asientoLibre = false;
+                                            facturaAsientos[i] = fil + "-" + col;
+                                            System.out.println(dibujarAsientos(limFil, limCol, asientosA16, asientosA18, asientosA20, asientosA22, asientosB16, asientosB18, asientosB20, asientosB22, asientosC16, asientosC18, asientosC20, asientosC22, asientosD16, asientosD18, asientosD20, asientosD22, pelicula, hora));
+                                        }
+                                        break;
+                                    case 2:
+                                        if (asientosC18[fil - 1][col - 1] == "X") {
+                                            System.out.println("\n" + "!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!");
+                                            System.out.println("ESE ASIENTO YA ESTA OCUPADO, PRUEBA CON OTRO");
+                                            System.out.println("!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!" + "\n");   //vuelve a preguntar si detecta que ya esta ocupado
+                                        } else {
+                                            asientosC18[fil - 1][col - 1] = "X";
+                                            asientoLibre = false;
+                                            facturaAsientos[i] = fil + "-" + col;
+                                            System.out.println(dibujarAsientos(limFil, limCol, asientosA16, asientosA18, asientosA20, asientosA22, asientosB16, asientosB18, asientosB20, asientosB22, asientosC16, asientosC18, asientosC20, asientosC22, asientosD16, asientosD18, asientosD20, asientosD22, pelicula, hora));
+                                        }
+                                        break;
+                                    case 3:
+                                        if (asientosC20[fil - 1][col - 1] == "X") {
+                                            System.out.println("\n" + "!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!");
+                                            System.out.println("ESE ASIENTO YA ESTA OCUPADO, PRUEBA CON OTRO");
+                                            System.out.println("!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!" + "\n");   //vuelve a preguntar si detecta que ya esta ocupado
+                                        } else {
+                                            asientosC20[fil - 1][col - 1] = "X";
+                                            asientoLibre = false;
+                                            facturaAsientos[i] = fil + "-" + col;
+                                            System.out.println(dibujarAsientos(limFil, limCol, asientosA16, asientosA18, asientosA20, asientosA22, asientosB16, asientosB18, asientosB20, asientosB22, asientosC16, asientosC18, asientosC20, asientosC22, asientosD16, asientosD18, asientosD20, asientosD22, pelicula, hora));
+                                        }
+                                        break;
+                                    case 4:
+                                        if (asientosC22[fil - 1][col - 1] == "X") {
+                                            System.out.println("\n" + "!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!");
+                                            System.out.println("ESE ASIENTO YA ESTA OCUPADO, PRUEBA CON OTRO");
+                                            System.out.println("!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!" + "\n");   //vuelve a preguntar si detecta que ya esta ocupado
+                                        } else {
+                                            asientosC22[fil - 1][col - 1] = "X";
+                                            asientoLibre = false;
+                                            facturaAsientos[i] = fil + "-" + col;
+                                            System.out.println(dibujarAsientos(limFil, limCol, asientosA16, asientosA18, asientosA20, asientosA22, asientosB16, asientosB18, asientosB20, asientosB22, asientosC16, asientosC18, asientosC20, asientosC22, asientosD16, asientosD18, asientosD20, asientosD22, pelicula, hora));
+                                        }
+                                        break;
+                                }
+                                break;
+                            case 4:
+                                switch (hora) {
+                                    case 1:
+                                        if (asientosD16[fil - 1][col - 1] == "X") {
+                                            System.out.println("\n" + "!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!");
+                                            System.out.println("ESE ASIENTO YA ESTA OCUPADO, PRUEBA CON OTRO");
+                                            System.out.println("!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!" + "\n");   //vuelve a preguntar si detecta que ya esta ocupado
+                                        } else {
+                                            asientosD16[fil - 1][col - 1] = "X";
+                                            asientoLibre = false;
+                                            facturaAsientos[i] = fil + "-" + col;
+                                            System.out.println(dibujarAsientos(limFil, limCol, asientosA16, asientosA18, asientosA20, asientosA22, asientosB16, asientosB18, asientosB20, asientosB22, asientosC16, asientosC18, asientosC20, asientosC22, asientosD16, asientosD18, asientosD20, asientosD22, pelicula, hora));
+                                        }
+                                        break;
+                                    case 2:
+                                        if (asientosD18[fil - 1][col - 1] == "X") {
+                                            System.out.println("\n" + "!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!");
+                                            System.out.println("ESE ASIENTO YA ESTA OCUPADO, PRUEBA CON OTRO");
+                                            System.out.println("!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!" + "\n");   //vuelve a preguntar si detecta que ya esta ocupado
+                                        } else {
+                                            asientosD18[fil - 1][col - 1] = "X";
+                                            asientoLibre = false;
+                                            facturaAsientos[i] = fil + "-" + col;
+                                            System.out.println(dibujarAsientos(limFil, limCol, asientosA16, asientosA18, asientosA20, asientosA22, asientosB16, asientosB18, asientosB20, asientosB22, asientosC16, asientosC18, asientosC20, asientosC22, asientosD16, asientosD18, asientosD20, asientosD22, pelicula, hora));
+                                        }
+                                        break;
+                                    case 3:
+                                        if (asientosD20[fil - 1][col - 1] == "X") {
+                                            System.out.println("\n" + "!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!");
+                                            System.out.println("ESE ASIENTO YA ESTA OCUPADO, PRUEBA CON OTRO");
+                                            System.out.println("!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!" + "\n");   //vuelve a preguntar si detecta que ya esta ocupado
+                                        } else {
+                                            asientosD20[fil - 1][col - 1] = "X";
+                                            asientoLibre = false;
+                                            facturaAsientos[i] = fil + "-" + col;
+                                            System.out.println(dibujarAsientos(limFil, limCol, asientosA16, asientosA18, asientosA20, asientosA22, asientosB16, asientosB18, asientosB20, asientosB22, asientosC16, asientosC18, asientosC20, asientosC22, asientosD16, asientosD18, asientosD20, asientosD22, pelicula, hora));
+                                        }
+                                        break;
+                                    case 4:
+                                        if (asientosD22[fil - 1][col - 1] == "X") {
+                                            System.out.println("\n" + "!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!");
+                                            System.out.println("ESE ASIENTO YA ESTA OCUPADO, PRUEBA CON OTRO");
+                                            System.out.println("!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!" + "\n");   //vuelve a preguntar si detecta que ya esta ocupado
+                                        } else {
+                                            asientosD22[fil - 1][col - 1] = "X";
+                                            asientoLibre = false;
+                                            facturaAsientos[i] = fil + "-" + col;
+                                            System.out.println(dibujarAsientos(limFil, limCol, asientosA16, asientosA18, asientosA20, asientosA22, asientosB16, asientosB18, asientosB20, asientosB22, asientosC16, asientosC18, asientosC20, asientosC22, asientosD16, asientosD18, asientosD20, asientosD22, pelicula, hora));
+                                        }
+                                        break;
+                                }
+                                break;
                         }
                     }
                 }
@@ -230,7 +469,7 @@ public class ProyectoFinalB2 {
                     System.out.println(matC[0][0] + " " + matC[0][1] + " [$" + matC[0][2] + "]");
                     System.out.println(matC[1][0] + " " + matC[1][1] + " [$" + matC[1][2] + "]");
                     System.out.println(matC[2][0] + " " + matC[2][1] + " [$" + matC[2][2] + "]");
-                    
+
                     System.out.println("******************************************");
                     combo = put.nextInt();
                     switch (combo) {
@@ -299,22 +538,304 @@ public class ProyectoFinalB2 {
 
     }
 
-    public static void crearSala(int limFil, int limCol, String asientos[][]) {
+    public static void crearSalaA16(int limFil, int limCol, String asientosA16[][]) {
         for (int i = 0; i < limFil; i++) {
             for (int j = 0; j < limCol; j++) {
-                asientos[i][j] = "-";
+                asientosA16[i][j] = "-";
             }
         }
     }
 
-    public static String dibujarAsientos(int limFil, int limCol, String asientos[][]) {
-        String dibujoAsientos = "";
-        for (int k = 0; k < limFil; k++) {
+    public static void crearSalaA18(int limFil, int limCol, String asientosA18[][]) {
+        for (int i = 0; i < limFil; i++) {
             for (int j = 0; j < limCol; j++) {
-                dibujoAsientos += (asientos[k][j] + "\t");
+                asientosA18[i][j] = "-";
             }
-            dibujoAsientos += ("\n");
         }
+    }
+
+    public static void crearSalaA20(int limFil, int limCol, String asientosA20[][]) {
+        for (int i = 0; i < limFil; i++) {
+            for (int j = 0; j < limCol; j++) {
+                asientosA20[i][j] = "-";
+            }
+        }
+    }
+
+    public static void crearSalaA22(int limFil, int limCol, String asientosA22[][]) {
+        for (int i = 0; i < limFil; i++) {
+            for (int j = 0; j < limCol; j++) {
+                asientosA22[i][j] = "-";
+            }
+        }
+    }
+
+    public static void crearSalaB16(int limFil, int limCol, String asientosB16[][]) {
+        for (int i = 0; i < limFil; i++) {
+            for (int j = 0; j < limCol; j++) {
+                asientosB16[i][j] = "-";
+            }
+        }
+    }
+
+    public static void crearSalaB18(int limFil, int limCol, String asientosB18[][]) {
+        for (int i = 0; i < limFil; i++) {
+            for (int j = 0; j < limCol; j++) {
+                asientosB18[i][j] = "-";
+            }
+        }
+    }
+
+    public static void crearSalaB20(int limFil, int limCol, String asientosB20[][]) {
+        for (int i = 0; i < limFil; i++) {
+            for (int j = 0; j < limCol; j++) {
+                asientosB20[i][j] = "-";
+            }
+        }
+    }
+
+    public static void crearSalaB22(int limFil, int limCol, String asientosB22[][]) {
+        for (int i = 0; i < limFil; i++) {
+            for (int j = 0; j < limCol; j++) {
+                asientosB22[i][j] = "-";
+            }
+        }
+    }
+
+    public static void crearSalaC16(int limFil, int limCol, String asientosC16[][]) {
+        for (int i = 0; i < limFil; i++) {
+            for (int j = 0; j < limCol; j++) {
+                asientosC16[i][j] = "-";
+            }
+        }
+    }
+
+    public static void crearSalaC18(int limFil, int limCol, String asientosC18[][]) {
+        for (int i = 0; i < limFil; i++) {
+            for (int j = 0; j < limCol; j++) {
+                asientosC18[i][j] = "-";
+            }
+        }
+    }
+
+    public static void crearSalaC20(int limFil, int limCol, String asientosC20[][]) {
+        for (int i = 0; i < limFil; i++) {
+            for (int j = 0; j < limCol; j++) {
+                asientosC20[i][j] = "-";
+            }
+        }
+    }
+
+    public static void crearSalaC22(int limFil, int limCol, String asientosC22[][]) {
+        for (int i = 0; i < limFil; i++) {
+            for (int j = 0; j < limCol; j++) {
+                asientosC22[i][j] = "-";
+            }
+        }
+    }
+
+    public static void crearSalaD16(int limFil, int limCol, String asientosD16[][]) {
+        for (int i = 0; i < limFil; i++) {
+            for (int j = 0; j < limCol; j++) {
+                asientosD16[i][j] = "-";
+            }
+        }
+    }
+
+    public static void crearSalaD18(int limFil, int limCol, String asientosD18[][]) {
+        for (int i = 0; i < limFil; i++) {
+            for (int j = 0; j < limCol; j++) {
+                asientosD18[i][j] = "-";
+            }
+        }
+    }
+
+    public static void crearSalaD20(int limFil, int limCol, String asientosD20[][]) {
+        for (int i = 0; i < limFil; i++) {
+            for (int j = 0; j < limCol; j++) {
+                asientosD20[i][j] = "-";
+            }
+        }
+    }
+
+    public static void crearSalaD22(int limFil, int limCol, String asientosD22[][]) {
+        for (int i = 0; i < limFil; i++) {
+            for (int j = 0; j < limCol; j++) {
+                asientosD22[i][j] = "-";
+            }
+        }
+    }
+
+    public static String dibujarAsientos(int limFil, int limCol, String asientosA16[][], String asientosA18[][], String asientosA20[][], String asientosA22[][], String asientosB16[][], String asientosB18[][], String asientosB20[][], String asientosB22[][], String asientosC16[][], String asientosC18[][], String asientosC20[][], String asientosC22[][], String asientosD16[][], String asientosD18[][], String asientosD20[][], String asientosD22[][], int pelicula, int hora) {
+        String dibujoAsientos = "";
+        switch (pelicula) {
+            case 1:
+                switch (hora) {
+                    case 1:
+
+                        for (int k = 0; k < limFil; k++) {
+                            for (int j = 0; j < limCol; j++) {
+                                dibujoAsientos += (asientosA16[k][j] + "\t");
+                            }
+                            dibujoAsientos += ("\n");
+                        }
+                        break;
+                    case 2:
+
+                        for (int k = 0; k < limFil; k++) {
+                            for (int j = 0; j < limCol; j++) {
+                                dibujoAsientos += (asientosA18[k][j] + "\t");
+                            }
+                            dibujoAsientos += ("\n");
+                        }
+                        break;
+                    case 3:
+
+                        for (int k = 0; k < limFil; k++) {
+                            for (int j = 0; j < limCol; j++) {
+                                dibujoAsientos += (asientosA20[k][j] + "\t");
+                            }
+                            dibujoAsientos += ("\n");
+                        }
+                        break;
+                    case 4:
+
+                        for (int k = 0; k < limFil; k++) {
+                            for (int j = 0; j < limCol; j++) {
+                                dibujoAsientos += (asientosA22[k][j] + "\t");
+                            }
+                            dibujoAsientos += ("\n");
+                        }
+                        break;
+
+                }
+                break;
+            case 2:
+                switch (hora) {
+                    case 1:
+
+                        for (int k = 0; k < limFil; k++) {
+                            for (int j = 0; j < limCol; j++) {
+                                dibujoAsientos += (asientosB16[k][j] + "\t");
+                            }
+                            dibujoAsientos += ("\n");
+                        }
+                        break;
+                    case 2:
+
+                        for (int k = 0; k < limFil; k++) {
+                            for (int j = 0; j < limCol; j++) {
+                                dibujoAsientos += (asientosB18[k][j] + "\t");
+                            }
+                            dibujoAsientos += ("\n");
+                        }
+                        break;
+                    case 3:
+
+                        for (int k = 0; k < limFil; k++) {
+                            for (int j = 0; j < limCol; j++) {
+                                dibujoAsientos += (asientosB20[k][j] + "\t");
+                            }
+                            dibujoAsientos += ("\n");
+                        }
+                        break;
+                    case 4:
+
+                        for (int k = 0; k < limFil; k++) {
+                            for (int j = 0; j < limCol; j++) {
+                                dibujoAsientos += (asientosB22[k][j] + "\t");
+                            }
+                            dibujoAsientos += ("\n");
+                        }
+                        break;
+
+                }
+                break;
+            case 3:
+                switch (hora) {
+                    case 1:
+
+                        for (int k = 0; k < limFil; k++) {
+                            for (int j = 0; j < limCol; j++) {
+                                dibujoAsientos += (asientosC16[k][j] + "\t");
+                            }
+                            dibujoAsientos += ("\n");
+                        }
+                        break;
+                    case 2:
+
+                        for (int k = 0; k < limFil; k++) {
+                            for (int j = 0; j < limCol; j++) {
+                                dibujoAsientos += (asientosC18[k][j] + "\t");
+                            }
+                            dibujoAsientos += ("\n");
+                        }
+                        break;
+                    case 3:
+
+                        for (int k = 0; k < limFil; k++) {
+                            for (int j = 0; j < limCol; j++) {
+                                dibujoAsientos += (asientosC20[k][j] + "\t");
+                            }
+                            dibujoAsientos += ("\n");
+                        }
+                        break;
+                    case 4:
+
+                        for (int k = 0; k < limFil; k++) {
+                            for (int j = 0; j < limCol; j++) {
+                                dibujoAsientos += (asientosC22[k][j] + "\t");
+                            }
+                            dibujoAsientos += ("\n");
+                        }
+                        break;
+
+                }
+                break;
+            case 4:
+                switch (hora) {
+                    case 1:
+
+                        for (int k = 0; k < limFil; k++) {
+                            for (int j = 0; j < limCol; j++) {
+                                dibujoAsientos += (asientosD16[k][j] + "\t");
+                            }
+                            dibujoAsientos += ("\n");
+                        }
+                        break;
+                    case 2:
+
+                        for (int k = 0; k < limFil; k++) {
+                            for (int j = 0; j < limCol; j++) {
+                                dibujoAsientos += (asientosD18[k][j] + "\t");
+                            }
+                            dibujoAsientos += ("\n");
+                        }
+                        break;
+                    case 3:
+
+                        for (int k = 0; k < limFil; k++) {
+                            for (int j = 0; j < limCol; j++) {
+                                dibujoAsientos += (asientosD20[k][j] + "\t");
+                            }
+                            dibujoAsientos += ("\n");
+                        }
+                        break;
+                    case 4:
+
+                        for (int k = 0; k < limFil; k++) {
+                            for (int j = 0; j < limCol; j++) {
+                                dibujoAsientos += (asientosD22[k][j] + "\t");
+                            }
+                            dibujoAsientos += ("\n");
+                        }
+                        break;
+
+                }
+                break;
+
+        }
+
         return dibujoAsientos;
     }
 
