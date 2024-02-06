@@ -11,11 +11,11 @@ public class ProyectoFinalB2 {
 
         Scanner put = new Scanner(System.in);
 
-        String nombrePelicula = "", sala = null, nombreHora = "", orden = "", nombreDia = "";
-        int comprar, nBoletos, pelicula, hora, fil, col, snack, combo, limFil = 5, limCol = 5, pcombo = 0, dia, clienteNuevo, contador = 0, continuar;
-        boolean opcionValida = true, asientoLibre = true, seguircomprando = true, otroCliente = true;
+        String nombrePelicula = "", sala = "", nombreHora = "", orden = "", nombreDia = "";
+        int comprar, nBoletos, pelicula, hora, fil, col, combo, limFil = 5, limCol = 5, maxClientes = 400, nuevoCliente, dia, clienteNuevo = 0, contador = 0;
+        boolean opcionValida = true, asientoLibre = true, otroCliente = true;
         double precioXboleto = 0, precioxCombo = 0, totalCombo = 0;
-        String asientosA16[][] = new String[limFil][limCol];
+        String asientosA16[][] = new String[limFil][limCol]; //SE INICIALIZAN LAS MATRICES DE LAS SALAS
         String asientosA18[][] = new String[limFil][limCol];
         String asientosA20[][] = new String[limFil][limCol];
         String asientosA22[][] = new String[limFil][limCol];
@@ -39,7 +39,7 @@ public class ProyectoFinalB2 {
         String matC[][] = new String[3][4];
         String nombresRandom[] = {"Pedro", "Carlos", "Juan", "Emilia", "Daniel", "Sebastian", "Manuel", "Maria", "Paula", "Jean"};
 
-        crearSalaA16(limFil, limCol, asientosA16);
+        crearSalaA16(limFil, limCol, asientosA16); //SE INVOCAN LOS METODOS PARA LLENAR LAS MATRICES DE LAS SALAS
         crearSalaA18(limFil, limCol, asientosA18);
         crearSalaA20(limFil, limCol, asientosA20);
         crearSalaA22(limFil, limCol, asientosA22);
@@ -61,15 +61,9 @@ public class ProyectoFinalB2 {
 
         importarDatosPeliculas(mat);
         importarDatosSnacks(matC);
-        System.out.println("CUANTOS CLIENTES VA A INGRESAR");
-        clienteNuevo = put.nextInt();
-        String nombres[] = new String[clienteNuevo];
-        for (int i = 0; i < clienteNuevo; i++) {
-            int aleat = (int) (Math.random() * 10 + 0);
-            nombres[i] = nombresRandom[aleat];
-        }
-        String datosRegistroCombos[][] = new String[clienteNuevo][3];
-        String datosRegistroPelicula[][] = new String[clienteNuevo][4];
+
+        String datosRegistroCombos[][] = new String[maxClientes][3];
+        String datosRegistroPelicula[][] = new String[maxClientes][4];
         System.out.println("Dia:");
         System.out.println("[1]LUNES");
         System.out.println("[2]MARTES  (boletos a mitad de precio)");
@@ -79,45 +73,45 @@ public class ProyectoFinalB2 {
         System.out.println("[6]SABADO");
         System.out.println("[7]DOMINGO  (snacks a mitad de precio)");
         dia = put.nextInt();
-        while (opcionValida) {
-            switch (dia) {
-                case 1:
-                    nombreDia = "LUNES";
-                    opcionValida = false;
-                    break;
-                case 2:
-                    nombreDia = "MARTES";
-                    opcionValida = false;
-                    break;
-                case 3:
-                    nombreDia = "MIERCOLES";
-                    opcionValida = false;
-                    break;
-                case 4:
-                    nombreDia = "JUEVES";
-                    opcionValida = false;
-                    break;
-                case 5:
-                    nombreDia = "VIERNES";
-                    opcionValida = false;
-                    break;
-                case 6:
-                    nombreDia = "SABADO";
-                    opcionValida = false;
-                    break;
-                case 7:
-                    nombreDia = "DOMINGO";
-                    opcionValida = false;
-                    break;
-                default:
-                    System.out.println("\n" + "!-!-!-!-!-!-!-!-!-!-!-!-!");
-                    System.out.println("NO EXISTE ESA OPCION");
-                    System.out.println("ELIGE OTRA VEZ");
-                    System.out.println("!-!-!-!-!-!-!-!-!-!-!-!-!" + "\n"); //vuelve a preguntar si no existe la respuesta
-                    pelicula = put.nextInt();
+        do {
+            while (opcionValida) {
+                switch (dia) {
+                    case 1:
+                        nombreDia = "LUNES";
+                        opcionValida = false;
+                        break;
+                    case 2:
+                        nombreDia = "MARTES";
+                        opcionValida = false;
+                        break;
+                    case 3:
+                        nombreDia = "MIERCOLES";
+                        opcionValida = false;
+                        break;
+                    case 4:
+                        nombreDia = "JUEVES";
+                        opcionValida = false;
+                        break;
+                    case 5:
+                        nombreDia = "VIERNES";
+                        opcionValida = false;
+                        break;
+                    case 6:
+                        nombreDia = "SABADO";
+                        opcionValida = false;
+                        break;
+                    case 7:
+                        nombreDia = "DOMINGO";
+                        opcionValida = false;
+                        break;
+                    default:
+                        System.out.println("\n" + "!-!-!-!-!-!-!-!-!-!-!-!-!");
+                        System.out.println("NO EXISTE ESA OPCION");
+                        System.out.println("ELIGE OTRA VEZ");
+                        System.out.println("!-!-!-!-!-!-!-!-!-!-!-!-!" + "\n"); //vuelve a preguntar si no existe la respuesta
+                        pelicula = put.nextInt();
+                }
             }
-        }
-        while (contador < clienteNuevo) {
             orden = "";
             System.out.println("****************************");
             System.out.println("DESEA COMPRAR BOLETOS?");
@@ -472,11 +466,11 @@ public class ProyectoFinalB2 {
 
                     System.out.println("******************************************");
                     combo = put.nextInt();
-                    switch (combo) {
+                    switch (combo) { 
                         case 1:
                             orden += (matC[0][0] + " ");
                             precioxCombo = Integer.valueOf(matC[0][2]);
-                            if ((nombrePelicula.equals(mat[0][0])) || (nombrePelicula.equals(mat[1][0]))) {//SI SE ESCOGE LA PELICULA SPIDERMAN O BARBIE DESCUENTO
+                            if ((nombrePelicula.equals(mat[0][0])) || (nombrePelicula.equals(mat[1][0]))) {
                                 System.out.println("*********************************************************");
                                 System.out.println("LAS FUNCIONES " + mat[0][0] + " Y " + mat[1][0] + " TIENE UN DESCUENTO PARA EL " + matC[0][0]);
                                 System.out.println("*********************************************************");
@@ -494,7 +488,7 @@ public class ProyectoFinalB2 {
                             precioxCombo = Integer.valueOf(matC[1][2]);
                             if (nombrePelicula.equals(mat[2][0])) {
                                 System.out.println("*******************************************************************************");
-                                System.out.println("LA FUNCION LEGO TIENE UN DESCUENTO PARA EL " + mat[1][0]);
+                                System.out.println("LA FUNCION " + mat[1][0] + " TIENE UN DESCUENTO PARA EL " + mat[1][0]);
                                 System.out.println("*******************************************************************************");
 
                                 precioxCombo = Integer.valueOf(matC[1][3]);
@@ -519,26 +513,42 @@ public class ProyectoFinalB2 {
                             opcionValida = false;
                             break;
                     }
-
                     System.out.println("******************************************");
                     totalCombo += precioxCombo;
                     System.out.println("DESEA COMPRAR OTRO COMBO?");
                     System.out.println("[1] Si");
                     System.out.println("[2] No");
-                    continuar = put.nextInt();
+                    comprar = put.nextInt();
 
-                } while (continuar == 1);
+                } while (comprar == 1);
                 System.out.println(facturaSnack(totalCombo, orden, datosRegistroCombos, contador));
             }
             contador++;
-
-        }
+            clienteNuevo++;
+            System.out.println("DESEA INGRESAR OTRO CLIENTE?");
+            System.out.println("[1] Si");
+            System.out.println("[2] No");
+            nuevoCliente = put.nextInt(); 
+            if (nuevoCliente == 2) {
+                otroCliente = false;
+            }
+            if (clienteNuevo >= maxClientes) {
+                System.out.println("AFORO MAXIMO ALCANZADO");
+                otroCliente = false;
+            }
+        } while (otroCliente); // SI SE ESCRIBE 2 O SE REGISTRAN MAS DE 400 CLIENTES, SE CIERRA EL CICLO
+        String nombres[] = new String[clienteNuevo]; 
+        for (int i = 0; i < clienteNuevo; i++) {//SE LLENA EL ARREGLO DE NOMBRES 
+            int aleat = (int) (Math.random() * 10 + 0);
+            nombres[i] = nombresRandom[aleat];
+        } 
+        System.out.println("-----------CLIENTES HOY: " + clienteNuevo + "-----------");
         exportarRegistroPeliculas(datosRegistroPelicula, clienteNuevo, nombreDia, nombres);
         exportarRegistroSnacks(clienteNuevo, orden, nombreDia, datosRegistroCombos, nombres);
 
     }
 
-    public static void crearSalaA16(int limFil, int limCol, String asientosA16[][]) {
+    public static void crearSalaA16(int limFil, int limCol, String asientosA16[][]) { //SE LLENAN LAS SALAS CON "-" PARA REPRESENTAR QUE ESTAN VACIAS
         for (int i = 0; i < limFil; i++) {
             for (int j = 0; j < limCol; j++) {
                 asientosA16[i][j] = "-";
@@ -570,7 +580,7 @@ public class ProyectoFinalB2 {
         }
     }
 
-    public static void crearSalaB16(int limFil, int limCol, String asientosB16[][]) {
+    public static void crearSalaB16(int limFil, int limCol, String asientosB16[][]) {//SE LLENAN LAS SALAS CON "-" PARA REPRESENTAR QUE ESTAN VACIAS
         for (int i = 0; i < limFil; i++) {
             for (int j = 0; j < limCol; j++) {
                 asientosB16[i][j] = "-";
@@ -602,7 +612,7 @@ public class ProyectoFinalB2 {
         }
     }
 
-    public static void crearSalaC16(int limFil, int limCol, String asientosC16[][]) {
+    public static void crearSalaC16(int limFil, int limCol, String asientosC16[][]) {//SE LLENAN LAS SALAS CON "-" PARA REPRESENTAR QUE ESTAN VACIAS
         for (int i = 0; i < limFil; i++) {
             for (int j = 0; j < limCol; j++) {
                 asientosC16[i][j] = "-";
@@ -634,7 +644,7 @@ public class ProyectoFinalB2 {
         }
     }
 
-    public static void crearSalaD16(int limFil, int limCol, String asientosD16[][]) {
+    public static void crearSalaD16(int limFil, int limCol, String asientosD16[][]) {//SE LLENAN LAS SALAS CON "-" PARA REPRESENTAR QUE ESTAN VACIAS
         for (int i = 0; i < limFil; i++) {
             for (int j = 0; j < limCol; j++) {
                 asientosD16[i][j] = "-";
@@ -666,7 +676,11 @@ public class ProyectoFinalB2 {
         }
     }
 
-    public static String dibujarAsientos(int limFil, int limCol, String asientosA16[][], String asientosA18[][], String asientosA20[][], String asientosA22[][], String asientosB16[][], String asientosB18[][], String asientosB20[][], String asientosB22[][], String asientosC16[][], String asientosC18[][], String asientosC20[][], String asientosC22[][], String asientosD16[][], String asientosD18[][], String asientosD20[][], String asientosD22[][], int pelicula, int hora) {
+    public static String dibujarAsientos(int limFil, int limCol, String asientosA16[][], String asientosA18[][], String asientosA20[][], String asientosA22[][], 
+            String asientosB16[][], String asientosB18[][], String asientosB20[][], String asientosB22[][], 
+            String asientosC16[][], String asientosC18[][], String asientosC20[][], String asientosC22[][], 
+            String asientosD16[][], String asientosD18[][], String asientosD20[][], String asientosD22[][], 
+            int pelicula, int hora) {
         String dibujoAsientos = "";
         switch (pelicula) {
             case 1:
@@ -951,3 +965,346 @@ public class ProyectoFinalB2 {
     }
 
 }
+/*
+run:
+Dia:
+[1]LUNES
+[2]MARTES  (boletos a mitad de precio)
+[3]MIERCOLES
+[4]JUEVES  (boletos a mitad de precio)
+[5]VIERNES
+[6]SABADO
+[7]DOMINGO  (snacks a mitad de precio)
+3
+****************************
+DESEA COMPRAR BOLETOS?
+[1] Si
+[2] No
+1
+****************************
+CUANTOS BOLETOS QUIERE?
+1
+****************************
+ELIJA SU PELICULA
+1 SPIDERMAN[$8] (estreno)
+2 LEGO[$4]
+3 BARBIE[$4]
+4 MATRIX[$2] (ultima semana)
+1
+****************************
+ELIJA LA HORA
+[1] 16h00 (descuento -25%)
+[2] 18h00
+[3] 20h00 (tarifa adicional +25%)
+[4] 22h00
+1
+****************************
+----------------------
+ELIJA EL ASIENTO 1
+-ELIJA SU FILA  -  [1-5]
+1
+-ELIJA SU COLUMNA  -  [1-5]
+1
+----------------------
+X	-	-	-	-	
+-	-	-	-	-	
+-	-	-	-	-	
+-	-	-	-	-	
+-	-	-	-	-	
+
+==================== FACTURA ====================
+Numero de Boletos: 1
+Precio por Boleto: $6.0
+Pelicula: SPIDERMAN
+Hora: 16h00
+Total: $6.0
+IVA: 0,72
+Total a Pagar: $6,72
+=================================================
+
+
+
+
+==================== BOLETO 1 ====================
+Pelicula: SPIDERMAN
+Hora: 16h00
+Sala: A
+Asiento: 1-1
+==================================================
+
+
+
+****************************
+DESEA COMPRAR SNACKS?
+[1] Si
+[2] No
+1
+****************************
+******************************************
+ESCOJA SU OPCION DE COMBO
+[1]COMBO Bebida_con_Canguil [$3]
+[2]COMBO Bebida_con_Canguil_y_un_Raspado [$7]
+[3]COMBO Nachos_con_burrito_y_un_Raspado [$9]
+******************************************
+1
+*********************************************************
+LAS FUNCIONES SPIDERMAN Y LEGO TIENE UN DESCUENTO PARA EL [1]COMBO
+*********************************************************
+******************************************
+DESEA COMPRAR OTRO COMBO?
+[1] Si
+[2] No
+2
+==================== FACTURA ====================
+Orden:[1]COMBO 
+IVA: 0,12
+TOTAL: $1
+TOTAL A PAGAR: $1,12
+=================================================
+
+
+
+
+
+DESEA INGRESAR OTRO CLIENTE?
+[1] Si
+[2] No
+1
+****************************
+DESEA COMPRAR BOLETOS?
+[1] Si
+[2] No
+1
+****************************
+CUANTOS BOLETOS QUIERE?
+2
+****************************
+ELIJA SU PELICULA
+1 SPIDERMAN[$8] (estreno)
+2 LEGO[$4]
+3 BARBIE[$4]
+4 MATRIX[$2] (ultima semana)
+2
+****************************
+ELIJA LA HORA
+[1] 16h00 (descuento -25%)
+[2] 18h00
+[3] 20h00 (tarifa adicional +25%)
+[4] 22h00
+1
+****************************
+----------------------
+ELIJA EL ASIENTO 1
+-ELIJA SU FILA  -  [1-5]
+1
+-ELIJA SU COLUMNA  -  [1-5]
+1
+----------------------
+X	-	-	-	-	
+-	-	-	-	-	
+-	-	-	-	-	
+-	-	-	-	-	
+-	-	-	-	-	
+
+----------------------
+ELIJA EL ASIENTO 2
+-ELIJA SU FILA  -  [1-5]
+2
+-ELIJA SU COLUMNA  -  [1-5]
+2
+----------------------
+X	-	-	-	-	
+-	X	-	-	-	
+-	-	-	-	-	
+-	-	-	-	-	
+-	-	-	-	-	
+
+==================== FACTURA ====================
+Numero de Boletos: 2
+Precio por Boleto: $3.0
+Pelicula: LEGO
+Hora: 16h00
+Total: $6.0
+IVA: 0,72
+Total a Pagar: $6,72
+=================================================
+
+
+
+
+==================== BOLETO 1 ====================
+Pelicula: LEGO
+Hora: 16h00
+Sala: B
+Asiento: 1-1
+==================================================
+
+
+==================== BOLETO 2 ====================
+Pelicula: LEGO
+Hora: 16h00
+Sala: B
+Asiento: 2-2
+==================================================
+
+
+
+****************************
+DESEA COMPRAR SNACKS?
+[1] Si
+[2] No
+2
+****************************
+DESEA INGRESAR OTRO CLIENTE?
+[1] Si
+[2] No
+1
+****************************
+DESEA COMPRAR BOLETOS?
+[1] Si
+[2] No
+1
+****************************
+CUANTOS BOLETOS QUIERE?
+1
+****************************
+ELIJA SU PELICULA
+1 SPIDERMAN[$8] (estreno)
+2 LEGO[$4]
+3 BARBIE[$4]
+4 MATRIX[$2] (ultima semana)
+1
+****************************
+ELIJA LA HORA
+[1] 16h00 (descuento -25%)
+[2] 18h00
+[3] 20h00 (tarifa adicional +25%)
+[4] 22h00
+1
+****************************
+----------------------
+ELIJA EL ASIENTO 1
+-ELIJA SU FILA  -  [1-5]
+1
+-ELIJA SU COLUMNA  -  [1-5]
+1
+----------------------
+
+!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!
+ESE ASIENTO YA ESTA OCUPADO, PRUEBA CON OTRO
+!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!
+
+----------------------
+ELIJA EL ASIENTO 1
+-ELIJA SU FILA  -  [1-5]
+4
+-ELIJA SU COLUMNA  -  [1-5]
+4
+----------------------
+X	-	-	-	-	
+-	-	-	-	-	
+-	-	-	-	-	
+-	-	-	X	-	
+-	-	-	-	-	
+
+==================== FACTURA ====================
+Numero de Boletos: 1
+Precio por Boleto: $6.0
+Pelicula: SPIDERMAN
+Hora: 16h00
+Total: $6.0
+IVA: 0,72
+Total a Pagar: $6,72
+=================================================
+
+
+
+
+==================== BOLETO 1 ====================
+Pelicula: SPIDERMAN
+Hora: 16h00
+Sala: A
+Asiento: 4-4
+==================================================
+
+
+
+****************************
+DESEA COMPRAR SNACKS?
+[1] Si
+[2] No
+2
+****************************
+DESEA INGRESAR OTRO CLIENTE?
+[1] Si
+[2] No
+1
+****************************
+DESEA COMPRAR BOLETOS?
+[1] Si
+[2] No
+2
+****************************
+****************************
+DESEA COMPRAR SNACKS?
+[1] Si
+[2] No
+1
+****************************
+******************************************
+ESCOJA SU OPCION DE COMBO
+[1]COMBO Bebida_con_Canguil [$3]
+[2]COMBO Bebida_con_Canguil_y_un_Raspado [$7]
+[3]COMBO Nachos_con_burrito_y_un_Raspado [$9]
+******************************************
+3
+******************************************
+DESEA COMPRAR OTRO COMBO?
+[1] Si
+[2] No
+1
+******************************************
+ESCOJA SU OPCION DE COMBO
+[1]COMBO Bebida_con_Canguil [$3]
+[2]COMBO Bebida_con_Canguil_y_un_Raspado [$7]
+[3]COMBO Nachos_con_burrito_y_un_Raspado [$9]
+******************************************
+2
+******************************************
+DESEA COMPRAR OTRO COMBO?
+[1] Si
+[2] No
+1
+******************************************
+ESCOJA SU OPCION DE COMBO
+[1]COMBO Bebida_con_Canguil [$3]
+[2]COMBO Bebida_con_Canguil_y_un_Raspado [$7]
+[3]COMBO Nachos_con_burrito_y_un_Raspado [$9]
+******************************************
+1
+*********************************************************
+LAS FUNCIONES SPIDERMAN Y LEGO TIENE UN DESCUENTO PARA EL [1]COMBO
+*********************************************************
+******************************************
+DESEA COMPRAR OTRO COMBO?
+[1] Si
+[2] No
+2
+==================== FACTURA ====================
+Orden:[3]COMBO [2]COMBO [1]COMBO 
+IVA: 2,04
+TOTAL: $17
+TOTAL A PAGAR: $19,04
+=================================================
+
+
+
+
+
+DESEA INGRESAR OTRO CLIENTE?
+[1] Si
+[2] No
+2
+-----------CLIENTES HOY: 4-----------
+BUILD SUCCESSFUL (total time: 1 minute 39 seconds)
+*/
